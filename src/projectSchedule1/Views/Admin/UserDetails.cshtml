@@ -1,0 +1,57 @@
+@model projectSchedule1.Models.Employee
+
+@{
+    ViewData["Title"] = "UserDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>User Details</h2>
+
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeAddr)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeAddr)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeBirthDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeBirthDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeEmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeFirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeFirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeLastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeLastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeePhoneNo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeePhoneNo)
+        </dd>
+    </dl>
+</div>
+<p>
+    <a asp-action="Edit" asp-route-id="@Model.EmployeeId">Edit</a> |
+    <a asp-action="ChangePassword" asp-route-id="@Model.EmployeeId">Change Password</a>|
+    <a asp-action="Index">Back to List</a> |
+
+</p>

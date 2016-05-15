@@ -1,0 +1,63 @@
+@model IEnumerable<projectSchedule1.Models.Employee>
+
+@{
+    ViewData["Title"] = "EmployeeList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>EmployeeList</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeAddr)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeBirthDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeePhoneNo)
+        </th>
+        <th></th>
+    </tr>
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeAddr)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeBirthDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeFirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeLastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeePhoneNo)
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.EmployeeId">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a>
+        </td>
+    </tr>
+}
+</table>
