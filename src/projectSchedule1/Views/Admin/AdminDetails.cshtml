@@ -1,7 +1,6 @@
 @model projectSchedule1.Models.Employee
-
 @{
-    ViewData["Title"] = "UserDetails";
+    ViewData["Title"] = "Admin Details";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -11,6 +10,14 @@
     <h4>Employee</h4>
     <hr />
     <dl class="dl-horizontal">
+        @if(Model.Files.Any(f => f.FileType ==projectSchedule1.Models.FileType.Avatar)){
+        <dt>
+            Avatar
+        </dt>
+        <dd>
+            <img src="~/File/Index?id=@Model.Files.First(f => f.FileType == projectSchedule1.Models.FileType.Avatar).FileId" alt="avatar" height="200" width="200"/>
+        </dd>
+        }
         <dt>
             @Html.DisplayNameFor(model => model.EmployeeAddr)
         </dt>
@@ -50,8 +57,8 @@
     </dl>
 </div>
 <p>
-    <a asp-action="Edit" asp-route-id="@Model.EmployeeId">Edit</a> |
-    <a asp-action="ChangePassword" asp-route-id="@Model.EmployeeId">Change Password</a>|
-    <a asp-action="Index">Back to List</a> |
+    <a asp-action="EditDetails" asp-route-id="@Model.EmployeeId">Edit</a> |
+    <a asp-action="ChangePassword" asp-controller="Admin" asp-route-id="@Model.EmployeeId">Change Password</a>|
+    
 
 </p>

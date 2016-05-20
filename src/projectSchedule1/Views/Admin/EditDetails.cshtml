@@ -1,0 +1,98 @@
+@model projectSchedule1.Models.Employee
+@{
+    ViewData["Title"] = "EditDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>EditDetails</h2>
+
+<form asp-action="EditDetails" enctype="multipart/form-data">
+    <div class="form-horizontal">
+        <h4>Employee</h4>
+        <hr />
+       
+        <input type="hidden" asp-for="EmployeeId" />
+        <div class="form-group">
+            <label asp-for="EmployeeAddr" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="EmployeeAddr" class="form-control" />
+                <span asp-validation-for="EmployeeAddr" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="EmployeeBirthDate" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="EmployeeBirthDate" class="form-control" />
+                <span asp-validation-for="EmployeeBirthDate" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="EmployeeEmail" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="EmployeeEmail" class="form-control" />
+                <span asp-validation-for="EmployeeEmail" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="EmployeeFirstName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="EmployeeFirstName" class="form-control" />
+                <span asp-validation-for="EmployeeFirstName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="EmployeeLastName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="EmployeeLastName" class="form-control" />
+                <span asp-validation-for="EmployeeLastName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="EmployeePhoneNo" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="EmployeePhoneNo" class="form-control" />
+                <span asp-validation-for="EmployeePhoneNo" class="text-danger" />
+            </div>
+        </div>
+
+        @if (Model.Files.Any(f => f.FileType == projectSchedule1.Models.FileType.Avatar))
+        {
+            <div class="form-group">
+                <span class="control-label col-md-2"><strong>Current Avatar</strong></span>
+                <div class="col-md-10">
+                    <img src="~/File/Index?id=@Model.Files.First(f => f.FileType == projectSchedule1.Models.FileType.Avatar).FileId" alt="avatar" height="100" width="100" />
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <label  class="col-md-2 control-label">Avatar</label>
+            <div class="col-md-10">
+                <input type="file" id="Avatar" name="upload" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="StatusId" class="control-label col-md-2">StatusId</label>
+            <div class="col-md-10">
+                <select asp-for="StatusId" class="form-control" asp-items="@ViewBag.adminStatus"></select>
+            </div>
+        </div>
+        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

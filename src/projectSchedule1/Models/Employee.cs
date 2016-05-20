@@ -24,6 +24,7 @@ namespace projectSchedule1.Models
 
         public string EmployeeAddr { get; set; }
         public string EmployeePhoneNo { get; set; }
+        [RegularExpression(@"^([\w\!\#$\%\&\'*\+\-\/\=\?\^`{\|\}\~]+\.)*[\w\!\#$\%\&\'‌​*\+\-\/\=\?\^`{\|\}\~]+@((((([a-zA-Z0-9]{1}[a-zA-Z0-9\-]{0,62}[a-zA-Z0-9]{1})|[‌​a-zA-Z])\.)+[a-zA-Z]{2,6})|(\d{1,3}\.){3}\d{1,3}(\:\d{1,5})?)$", ErrorMessage = "Email address must be a valid email address.")]
         public string EmployeeEmail { get; set; }
         public int StatusId { get; set; }
 

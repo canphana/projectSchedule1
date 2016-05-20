@@ -13,13 +13,14 @@ namespace projectSchedule1.Controllers
     {
         [FromServices]
         public  AppDbContext appContext { get; set; }
-
+       
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Login(LoginModels lm)
         {
             try
@@ -34,7 +35,7 @@ namespace projectSchedule1.Controllers
                         HttpContext.Session.SetString("UserType", accountType.AccountTypeName.ToString());
                         if (HttpContext.Session.GetString("UserType").Equals("Admin"))
                         {
-                            return RedirectToAction("UserDetails", "Admin");
+                            return RedirectToAction("AdminDetails", "Admin");
                         }
                         else
                         {
@@ -47,9 +48,9 @@ namespace projectSchedule1.Controllers
                     }
                 }
             }
-            catch(Exception)
+catch(Exception)
             {
-                ModelState.AddModelError(string.Empty, "The account or password you type may not been correct.");
+                ModelState.AddModelError(string.Empty, "There is a problem logging in, please try again");
             }
             return View();
         }
