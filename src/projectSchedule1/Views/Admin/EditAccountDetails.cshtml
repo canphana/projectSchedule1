@@ -1,0 +1,60 @@
+@model projectSchedule1.Models.LoginAccount
+
+@{
+    ViewData["Title"] = "EditAccountDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>EditAccountDetails</h2>
+
+<form asp-action="EditAccountDetails" method="post">
+    <div class="form-horizontal">
+        <h4>LoginAccount</h4>
+        <hr />
+        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="LoginAccountId" />
+        <div class="form-group">
+            <label asp-for="AccountTypeId" class="control-label col-md-2">AccountTypeId</label>
+            <div class="col-md-10">
+                <select asp-for="AccountTypeId" class="form-control" asp-items="@ViewBag.accountType"></select>
+                <span asp-validation-for="AccountTypeId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="EmployeeId" class="control-label col-md-2">EmployeeId</label>
+            <div class="col-md-10">
+                <select asp-for="EmployeeId" class="form-control" asp-items="@ViewBag.employee"></select>
+                <span asp-validation-for="EmployeeId" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LoginAccountName" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LoginAccountName" class="form-control" />
+                <span asp-validation-for="LoginAccountName" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="LoginAccountPassword" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="LoginAccountPassword" type="password" contenteditable="false" class="form-control" />
+                <span asp-validation-for="LoginAccountPassword" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="LoginAccount">Back to List</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

@@ -21,14 +21,14 @@
         <div class="form-group">
             <label asp-for="ProjectDesc" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="ProjectDesc" class="form-control" />
+                <textarea asp-for="ProjectDesc" class="form-control" ></textarea>
                 <span asp-validation-for="ProjectDesc" class="text-danger" />
             </div>
         </div>
         <div class="form-group">
             <label asp-for="ProjectEndDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="ProjectEndDate" class="form-control" />
+                <input asp-for="ProjectEndDate" class="form-control date-picker" type="text"  />
                 <span asp-validation-for="ProjectEndDate" class="text-danger" />
             </div>
         </div>
@@ -42,7 +42,7 @@
         <div class="form-group">
             <label asp-for="ProjectStartDate" class="col-md-2 control-label"></label>
             <div class="col-md-10">
-                <input asp-for="ProjectStartDate" class="form-control" />
+                <input asp-for="ProjectStartDate" class="form-control date-picker" type="text" />
                 <span asp-validation-for="ProjectStartDate" class="text-danger" />
             </div>
         </div>
@@ -61,11 +61,11 @@
 </form>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Project">Back to List</a>
 </div>
 
 @section Scripts {
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }

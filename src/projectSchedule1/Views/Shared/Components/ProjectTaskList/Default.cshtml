@@ -1,0 +1,48 @@
+@model Sakura.AspNet.IPagedList<projectSchedule1.Models.ProjectTask>
+@{
+    var emPagedOptions = PagedListOption.getPagedListOption();
+}
+<table class="table table-hover table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().TaskDesc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().TaskEndDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().TaskStartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Status.StatusName)
+        </th>
+        <th></th>
+    </tr>
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaskDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaskEndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaskStartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status.StatusName)
+        </td>
+        <td>
+@if (ViewContext.RouteData.Values["Controller"].ToString() == "Admin")
+{
+            <a asp-action="EditTaskDetails" asp-route-taskId="@item.TaskId" asp-route-projectId="@item.ProjectId">Edit</a>
+}
+            <a asp-action="ProjectTaskDetails" asp-route-taskId="@item.TaskId">Details</a>
+        </td>
+    </tr>
+}
+</table>
+<center>
+    <nav asp-pager-source="Model" asp-pager-options="emPagedOptions"></nav>
+</center>

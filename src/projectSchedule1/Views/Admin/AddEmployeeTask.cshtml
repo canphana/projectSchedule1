@@ -1,0 +1,85 @@
+@model Sakura.AspNet.IPagedList<projectSchedule1.Models.Employee>
+@{
+    ViewData["Title"] = "AddEmployeeTask";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var emPagedOptions = PagedListOption.getPagedListOption();
+}
+
+
+<h2>AddEmployeeTask</h2>
+
+@using (Html.BeginForm(FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="form-group">
+        <label>Find by name:</label>
+        @Html.TextBox("searchString")
+        <input type="submit" value="Search" class="btn btn-default btn-md" />
+    </div>
+}
+
+<form method="post">
+  
+    <input type="submit" value="Add Employee to Task" class="btn btn-primary btn-lg" />
+  
+    <table class="table table-bordered table-hover table-responsive">
+        <tr>
+            <th></th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().EmployeeFirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().EmployeeLastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().EmployeePhoneNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().EmployeeAddr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().EmployeeBirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().EmployeeEmail)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" name="employeeId" value="@item.EmployeeId" />
+                </td>               
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeFirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeLastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeePhoneNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeAddr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeBirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeEmail)
+                </td>
+                <td>
+                    <a asp-action="EditDetails" asp-route-id="@item.EmployeeId">Edit</a> |
+                    <a asp-action="EmployeeDetails" asp-route-id="@item.EmployeeId">Details</a>
+
+                </td>
+            </tr>
+        }
+    </table>
+    <center>
+        <nav asp-pager-source="Model" asp-pager-options="emPagedOptions"></nav>
+    </center>
+
+</form>

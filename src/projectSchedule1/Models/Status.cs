@@ -14,11 +14,12 @@ namespace projectSchedule1.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int StatusId { get; set; }
         [Column(TypeName = "nvarchar(200)")]
+        [Display(Name="Status")]
         public string StatusName { get; set; }
 
         [Column(TypeName = "nvarchar(200)")]
         public string StatusDesc { get; set; }
-        public Task Task{get; set;}
+        public ProjectTask ProjectTask{get; set;}
         public Project Project { get; set; }
         public Employee Employee { get; set; }
 

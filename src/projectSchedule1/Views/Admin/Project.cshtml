@@ -1,26 +1,51 @@
-@model IEnumerable<projectSchedule1.Models.Project>
+@model Sakura.AspNet.IPagedList<projectSchedule1.Models.Project>
 
 @{
     ViewData["Title"] = "Project";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var emPagedOptions = PagedListOption.getPagedListOption();
 }
 
 <h2>Project</h2>
-<div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
-
-<table class="table">
+<p>
+    <a asp-action="CreateProject" class="btn btn-primary btn-lg">Add New</a>
+</p>
+@using (Html.BeginForm(FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="form-group">
+        Find by name: @Html.TextBox("searchString")
+        <input type="submit" value="Search" class="btn btn-default btn-md" />
+    </div>
+}
+<table class="table table-bordered table-hover table-responsive" >
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ProjectDesc)
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ProjectDesc)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProjectEndDate)
+            <a asp-route-sortOrder="@ViewBag.EndDateSortParm" asp-route-currentFilter="@ViewBag.CurrentFilter">
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ProjectEndDate)
+             </a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProjectName)
+            <a asp-route-sortOrder="@ViewBag.NameSortParm" asp-route-currentFilter="@ViewBag.CurrentFilter">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ProjectName)
+            </a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ProjectStartDate)
+            <a asp-route-sortOrder="@ViewBag.StartDateSortParm" asp-route-currentFilter="@ViewBag.CurrentFilter">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ProjectStartDate)
+            </a>
+        </th>
+        <th>
+            <a asp-route-sortOrder="@ViewBag.StatusSortParm" asp-route-currentFilter="@ViewBag.CurrentFilter">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Status.StatusName)
+            </a>
+        </th>
+        <th>
+            <a asp-route-sortOrder="@ViewBag.ClientSortParm" asp-route-currentFilter="@ViewBag.CurrentFilter">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Client.ClientName)
+            </a>
         </th>
         <th></th>
     </tr>
@@ -40,13 +65,22 @@
             @Html.DisplayFor(modelItem => item.ProjectStartDate)
         </td>
         <td>
-            <a asp-action="Edit" asp-route-id="@item.ProjectId">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.ProjectId">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.ProjectId">Delete</a>
+            @Html.DisplayFor(modelItem => item.Status.StatusName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.ClientName)
+        </td>
+        <td>
+            <a asp-action="EditProject" asp-route-id="@item.ProjectId">Edit</a> |
+            <a asp-action="ProjectDetails" asp-route-id="@item.ProjectId">Details</a> |
+            <a asp-action="DeleteProject" asp-route-id="@item.ProjectId" asp-route-confirm="true" onclick="return confirm('Are you sure you wish to delete this?');">Delete</a>
         </td>
     </tr>
 }
 </table>
-<p>
-    <a asp-action="CreateProject">Add New</a>
-</p>
+<center>
+    Page @(Model.TotalPage < Model.PageIndex ? 0 : Model.PageIndex) of @Model.TotalPage
+    <nav asp-pager-source="Model" asp-pager-options="emPagedOptions" asp-route-currentFilter="@ViewBag.CurrentFilter"
+         asp-route-currentSort="@ViewBag.CurrentSort"></nav>
+</center>
+

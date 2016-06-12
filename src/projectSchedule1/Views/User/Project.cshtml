@@ -1,0 +1,82 @@
+@model Sakura.AspNet.IPagedList<projectSchedule1.Models.Project>
+
+@{
+    ViewData["Title"] = "Project";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    var emPagedOptions = PagedListOption.getPagedListOption();
+}
+
+<h2>Project</h2>
+
+@using (Html.BeginForm(FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="form-group">
+        Find by name: @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" class="btn btn-default btn-md" />
+    </div>
+}
+<table class="table table-bordered table-hover table-responsive" >
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ProjectDesc)
+        </th>
+        <th>
+            <a asp-route-sortOrder="@ViewBag.EndDateSortParm" asp-route-currentFilter="@ViewBag.CurrentFilter">
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ProjectEndDate)
+             </a>
+        </th>
+        <th>
+            <a asp-route-sortOrder="@ViewBag.NameSortParm" asp-route-currentFilter="@ViewBag.CurrentFilter">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ProjectName)
+            </a>
+        </th>
+        <th>
+            <a asp-route-sortOrder="@ViewBag.StartDateSortParm" asp-route-currentFilter="@ViewBag.CurrentFilter">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().ProjectStartDate)
+            </a>
+        </th>
+        <th>
+            <a asp-route-sortOrder="@ViewBag.StatusSortParm" asp-route-currentFilter="@ViewBag.CurrentFilter">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Status.StatusName)
+            </a>
+        </th>
+        <th>
+            <a asp-route-sortOrder="@ViewBag.ClientSortParm" asp-route-currentFilter="@ViewBag.CurrentFilter">
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Client.ClientName)
+            </a>
+        </th>
+        <th></th>
+    </tr>
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectDesc)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectEndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectStartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status.StatusName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Client.ClientName)
+        </td>
+        <td>
+            <a asp-action="ProjectDetails" asp-route-id="@item.ProjectId">Details</a>
+        </td>
+    </tr>
+}
+</table>
+<center>
+    Page @(Model.TotalPage < Model.PageIndex ? 0 : Model.PageIndex) of @Model.TotalPage
+    <nav asp-pager-source="Model" asp-pager-options="emPagedOptions" asp-route-currentFilter="@ViewBag.CurrentFilter"
+         asp-route-currentSort="@ViewBag.CurrentSort"></nav>
+</center>
+

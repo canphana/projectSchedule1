@@ -1,0 +1,45 @@
+﻿@model Sakura.AspNet.IPagedList<projectSchedule1.Models.Employee>
+@{
+    var emPagedOptions = PagedListOption.getPagedListOption();
+}
+
+<table class="table table-hover table-bordered table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().EmployeeFirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().EmployeeLastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Status.StatusName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status.StatusName)
+            </td>
+            <td>
+            @if (ViewContext.RouteData.Values["Controller"].ToString() == "Admin")
+            { 
+                <a asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a>
+            }
+                <a asp-action="EmployeeDetails" asp-route-id="@item.EmployeeId">Details</a>
+            </td>
+        </tr>
+    }
+</table>
+<center>
+
+    <nav asp-pager-source="Model" asp-pager-options="emPagedOptions"></nav>
+</center>

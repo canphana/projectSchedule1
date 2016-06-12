@@ -1,0 +1,51 @@
+@model projectSchedule1.Models.ProjectReport
+
+@{
+    ViewData["Title"] = "AddProjectReport";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<h2>AddProjectReport</h2>
+
+<form asp-action="AddProjectReport">
+    <div class="form-horizontal">
+        <h4>ProjectReport</h4>
+        <hr />
+        <div asp-validation-summary="ValidationSummary.ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="EmployeeId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="EmployeeId" class ="form-control"  readonly value="@ViewBag.employeeId"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProjectId" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <input asp-for="ProjectId" class ="form-control" readonly value="@ViewBag.projectId"/>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label asp-for="ProjectReportDesc" class="col-md-2 control-label"></label>
+            <div class="col-md-10">
+                <textarea asp-for="ProjectReportDesc" class="form-control" cols="15" rows="12"></textarea>
+                <span asp-validation-for="ProjectReportDesc" class="text-danger" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <a asp-action="ProjectDetails" class="btn btn-default" asp-route-id="@ViewBag.projectId">Back</a>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

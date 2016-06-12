@@ -10,6 +10,6 @@ namespace projectSchedule1.Models
         public int EmployeeId { get; set; }
         public int TaskId { get; set; }
         public Employee Employee { get; set; }
-        public Task Task { get; set; }
+        public ProjectTask ProjectTask { get; set; }
     }
 }

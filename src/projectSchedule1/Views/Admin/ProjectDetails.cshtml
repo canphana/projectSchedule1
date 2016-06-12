@@ -1,0 +1,80 @@
+@model projectSchedule1.Models.Project
+
+@{
+    ViewData["Title"] = "ProjectDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Project Details</h2>
+<div class="container">
+    <div class="pull-left">
+        <h4>Project</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ProjectDesc)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ProjectDesc)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ProjectEndDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ProjectEndDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ProjectName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ProjectName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.ProjectStartDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.ProjectStartDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Client.ClientName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Client.ClientName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Status.StatusName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Status.StatusName)
+            </dd>
+        </dl>
+    </div>
+    <div class="pull-right">
+        <h4>Employee in Project</h4>
+        <p>
+            <a asp-action="AddEmployeeProject" asp-route-projectId="@Model.ProjectId" class="btn btn-primary btn-xs">Add New Employee to Project</a>
+        </p>
+        @Component.Invoke("EmployeeProjectList", Model.ProjectId)
+    </div>
+</div>
+<div class="container">
+    
+    <div class="pull-left">
+        <h4>Task in project</h4>
+        <p>
+            <a asp-action="AddTask" asp-route-projectId="@Model.ProjectId" class="btn btn-primary btn-xs">Add new Task</a>
+        </p>
+        @Component.Invoke("ProjectTaskList", Model.ProjectId)
+    </div>
+    <div class="pull-right">
+        <h4>Project Report</h4>
+        <p>
+            <a asp-action="AddProjectReport" asp-route-id="@Model.ProjectId" class="btn btn-primary btn-xs">Create New Report</a>
+        </p>
+        @Component.Invoke("ProjectReportList", Model.ProjectId)
+    </div>
+</div>
+<p>
+    <a asp-action="EditProject" asp-route-id="@Model.ProjectId" class="btn btn-primary btn-md">Edit</a> 
+    <a asp-action="Project" class="btn btn-primary btn-md">Back to List</a>
+</p>

@@ -1,0 +1,61 @@
+@model Sakura.AspNet.IPagedList<projectSchedule1.Models.Client>
+
+@{
+    ViewData["Title"] = "Client";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+    var emPagedOptions = PagedListOption.getPagedListOption();
+}
+
+<h2>Client</h2>
+
+@using (Html.BeginForm(FormMethod.Get, new { @class = "form-inline" }))
+{
+    <div class="form-group">
+        Find by name: @Html.TextBox("searchString")
+        <input type="submit" value="Search" class="btn btn-default btn-md" />
+    </div>
+}
+<table class="table table-bordered table-hover table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ClientAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ClientEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ClientName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ClientPhoneNo)
+        </th>
+        <th></th>
+    </tr>
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ClientPhoneNo)
+        </td>
+        <td>
+            <a asp-action="EditClient" asp-route-id="@item.ClientId">Edit</a> |
+            <a asp-action="ClientDetails" asp-route-id="@item.ClientId">Details</a> |
+            <a asp-action="DeleteClient" asp-route-id="@item.ClientId" asp-route-confirm="true" onclick="return confirm('Are you sure you wish to delete this?');">Delete</a>
+        </td>
+    </tr>
+}
+</table>
+<center>
+  Page @(Model.TotalPage < Model.PageIndex ? 0 : Model.PageIndex) of @Model.TotalPage
+<nav asp-pager-source="Model" asp-pager-options="emPagedOptions" asp-route-currentFilter="@ViewBag.CurrentFilter"
+     asp-route-currentSort="@ViewBag.CurrentSort"></nav>
+</center>

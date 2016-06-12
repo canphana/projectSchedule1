@@ -1,9 +1,11 @@
 {
-  "version": "1.0.0-*",
+  "commands": {
+    "web": "Microsoft.AspNet.Server.Kestrel",
+    "ef": "EntityFramework.Commands"
+  },
   "compilationOptions": {
     "emitEntryPoint": true
   },
-
   "dependencies": {
     "EntityFramework.Commands": "7.0.0-rc1-final",
     "EntityFramework.MicrosoftSqlServer": "7.0.0-rc1-final",
@@ -29,14 +31,14 @@
     "Microsoft.AspNet.Session": "1.0.0-rc1-final",
     "Microsoft.Extensions.Caching.Memory": "1.0.0-rc1-final",
     "Microsoft.AspNet.Mvc.ViewFeatures": "6.0.0-rc1-final",
-    "Microsoft.AspNet.Http": "1.0.0-rc1-final"
+    "Microsoft.AspNet.Http": "1.0.0-rc1-final",
+    "Sakura.AspNet.Mvc.PagedList": "1.0.0-rc1-update2"
+    
   },
-
-  "commands": {
-    "web": "Microsoft.AspNet.Server.Kestrel",
-      "ef": "EntityFramework.Commands"
-  },
-
+  "exclude": [
+    "wwwroot",
+    "node_modules"
+  ],
   "frameworks": {
     "dnx451": {
       "dependencies": {
@@ -45,16 +47,12 @@
     },
     "dnxcore50": { }
   },
-
-  "exclude": [
-    "wwwroot",
-    "node_modules"
-  ],
   "publishExclude": [
     "**.user",
     "**.vspscc"
   ],
   "scripts": {
     "prepublish": [ "npm install", "bower install", "gulp clean", "gulp min" ]
-  }
+  },
+  "version": "1.0.0-*"
 }

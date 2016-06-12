@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Data.Entity;
 using projectSchedule1.Models;
+using Sakura.AspNet.Mvc.PagedList;
 
 namespace projectSchedule1
 {
@@ -38,6 +39,7 @@ namespace projectSchedule1
             services.AddMvc();
             services.AddCaching(); // Adds a default in-memory implementation of IDistributedCache
             services.AddSession();
+            services.UseBootstrapPagerGenerator();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

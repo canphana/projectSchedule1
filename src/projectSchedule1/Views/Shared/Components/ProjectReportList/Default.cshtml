@@ -1,0 +1,40 @@
+@model Sakura.AspNet.IPagedList<projectSchedule1.Models.ProjectReport>
+@{
+    var emPagedOptions = PagedListOption.getPagedListOption();
+}
+
+<table class="table table-hover table-bordered">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().EmployeeId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ProjectReportDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().ProjectReportDesc)
+        </th>
+        <th></th>
+    </tr>
+    
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectReportDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectReportDesc)
+        </td>
+
+        <td>           
+            <a asp-action="Details" asp-route-id="@item.ProjectReportId">Details</a>      
+        </td>
+    </tr>
+}
+</table>
+<center>
+    <nav asp-pager-source="Model" asp-pager-options="emPagedOptions"></nav>
+</center>

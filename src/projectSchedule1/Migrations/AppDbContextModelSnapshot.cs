@@ -35,13 +35,17 @@ namespace projectSchedule1.Migrations
                     b.Property<int>("ClientId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ClientAddress");
+                    b.Property<string>("ClientAddress")
+                        .IsRequired();
 
-                    b.Property<string>("ClientEmail");
+                    b.Property<string>("ClientEmail")
+                        .IsRequired();
 
-                    b.Property<string>("ClientName");
+                    b.Property<string>("ClientName")
+                        .IsRequired();
 
-                    b.Property<string>("ClientPhoneNo");
+                    b.Property<string>("ClientPhoneNo")
+                        .IsRequired();
 
                     b.HasKey("ClientId");
                 });
@@ -51,11 +55,13 @@ namespace projectSchedule1.Migrations
                     b.Property<int>("EmployeeId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("EmployeeAddr");
+                    b.Property<string>("EmployeeAddr")
+                        .IsRequired();
 
                     b.Property<DateTime>("EmployeeBirthDate");
 
-                    b.Property<string>("EmployeeEmail");
+                    b.Property<string>("EmployeeEmail")
+                        .IsRequired();
 
                     b.Property<string>("EmployeeFirstName")
                         .IsRequired()
@@ -65,7 +71,8 @@ namespace projectSchedule1.Migrations
                         .IsRequired()
                         .HasAnnotation("Relational:ColumnType", "nvarchar(200)");
 
-                    b.Property<string>("EmployeePhoneNo");
+                    b.Property<string>("EmployeePhoneNo")
+                        .IsRequired();
 
                     b.Property<int>("StatusId");
 
@@ -138,11 +145,13 @@ namespace projectSchedule1.Migrations
                     b.Property<int>("ClientId");
 
                     b.Property<string>("ProjectDesc")
+                        .IsRequired()
                         .HasAnnotation("Relational:ColumnType", "nvarchar(200)");
 
                     b.Property<DateTime>("ProjectEndDate");
 
                     b.Property<string>("ProjectName")
+                        .IsRequired()
                         .HasAnnotation("Relational:ColumnType", "nvarchar(200)");
 
                     b.Property<DateTime>("ProjectStartDate");

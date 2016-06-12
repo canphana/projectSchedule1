@@ -39,7 +39,7 @@ namespace projectSchedule1.Controllers
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("UserDetails", "User");
                         }
                     }
                     else
@@ -54,5 +54,11 @@ catch(Exception)
             }
             return View();
         }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login");
+        }
     }
+
 }

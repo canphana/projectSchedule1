@@ -1,0 +1,56 @@
+@model projectSchedule1.Models.ProjectTask
+
+@{
+    ViewData["Title"] = "ProjectTaskDetails";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>ProjectTaskDetails</h2>
+
+<div>
+    <h4>ProjectTask</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskDesc)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaskDesc)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskEndDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaskEndDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskStartDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaskStartDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Project.ProjectName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Project.ProjectName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status.StatusName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Status.StatusName)
+        </dd>
+    </dl>
+</div>
+<div class="container">
+    <h4>Employee in Project</h4>
+    <p>
+        <a asp-action="AddEmployeeTask" asp-route-projectId="@Model.ProjectId" asp-route-taskId="@Model.TaskId"class="btn btn-primary btn-xs">Add New Employee to Task</a>
+    </p>
+    @Component.Invoke("EmployeeTaskList",Model.TaskId)
+</div>
+<p>
+    <a asp-action="EditTaskDetails" asp-route-taskId="@Model.TaskId" asp-route-projectId="@Model.ProjectId" class="btn btn-primary btn-xs">Edit</a> 
+    <a asp-action="ProjectDetails" asp-route-id="@Model.ProjectId" class="btn btn-primary btn-xs">Back to Project</a>
+</p>

@@ -20,7 +20,7 @@ namespace projectSchedule1.Models
                  .HasForeignKey(et => et.EmployeeId);
 
             modelBuilder.Entity<EmployeeTask>()
-                .HasOne(et => et.Task)
+                .HasOne(et => et.ProjectTask)
                 .WithMany(t => t.EmployeeTasks)
                 .HasForeignKey(et => et.TaskId);
 
@@ -32,21 +32,31 @@ namespace projectSchedule1.Models
              .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<EmployeeProject>()
-                .HasOne(et => et.Project)
+                .HasOne(ep => ep.Project)
                 .WithMany(t => t.EmployeeProjects)
                 .HasForeignKey(et => et.ProjectId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ProjectReport>()
+               .HasOne(pr => pr.Project)
+               .WithMany(p => p.ProjectReports)
+               .HasForeignKey(pr => pr.ProjectId)
+               .OnDelete(DeleteBehavior.Restrict);
+
 
         }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Client> Clients { get; set; }
         public DbSet<Project> Projects { get; set; }
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<ProjectTask> ProjectTasks { get; set; }
         public DbSet<File> Files { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<AccountType> AccountTypes { get; set; }
         public DbSet<ProjectReport> ProjectReports { get; set; }
         public DbSet<LoginAccount> LoginAcounts { get; set; }
+
+        public DbSet<EmployeeProject> EmployeeProjects { get; set; }
+        public DbSet<EmployeeTask> EmployeeTasks { get; set; }
 
     }
 

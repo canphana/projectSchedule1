@@ -12,6 +12,8 @@ namespace projectSchedule1.Models
         public int ProjectReportId { get; set; }
         public int EmployeeId { get; set; }
         public int ProjectId { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime ProjectReportDate { get; set; }
         public string ProjectReportDesc { get; set; }
         public Employee Employee { get; set; }

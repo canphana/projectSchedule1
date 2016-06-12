@@ -1,63 +1,88 @@
-@model IEnumerable<projectSchedule1.Models.Employee>
-
+@model Sakura.AspNet.IPagedList<projectSchedule1.Models.Employee>
 @{
     ViewData["Title"] = "EmployeeList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var emPagedOptions = PagedListOption.getPagedListOption();
 }
 
 <h2>EmployeeList</h2>
 
-<p>
-    <a asp-action="CreateEmployee">Create New</a>
-</p>
-<table class="table">
+
+<a asp-action="CreateEmployee" class="btn btn-primary btn-md">Create New</a>
+
+@using (Html.BeginForm(FormMethod.Get,new { @class = "form-inline" }))
+{
+    <div class="form-group">
+        <label>Find by name:</label>
+        @Html.TextBox("searchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" class="btn btn-default btn-md" />
+    </div>
+}
+<table class="table table-bordered table-hover table-responsive">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.EmployeeAddr)
+            <a>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().EmployeeAddr)
+            </a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmployeeBirthDate)
+            <a asp-route-sortOrder="@ViewBag.DateSortParm" asp-route-currentFilter="@ViewBag.CurrentFilter">@Html.DisplayNameFor(model => model.FirstOrDefault().EmployeeBirthDate)</a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmployeeEmail)
+            <a>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().EmployeeEmail)
+            </a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmployeeFirstName)
+            <a asp-route-sortOrder="@ViewBag.FirstNameSortParm" asp-route-currentFilter="@ViewBag.CurrentFilter">  @Html.DisplayNameFor(model => model.FirstOrDefault().EmployeeFirstName)</a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmployeeLastName)
+            <a asp-route-sortOrder="@ViewBag.LastNameSortParm" asp-route-currentFilter="@ViewBag.CurrentFilter">@Html.DisplayNameFor(model => model.FirstOrDefault().EmployeeLastName)</a>
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.EmployeePhoneNo)
+            <a>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().EmployeePhoneNo)
+            </a>
+        </th>
+        <th>
+            <a asp-route-sortOrder="@ViewBag.StatusSortParm" asp-route-currentFilter="@ViewBag.CurrentFilter"> @Html.DisplayNameFor(model => model.FirstOrDefault().Status.StatusName) </a>
         </th>
         <th></th>
     </tr>
-    
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeAddr)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeBirthDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeEmail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeFirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeeLastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EmployeePhoneNo)
-        </td>
-        <td>
-            <a asp-action="Edit" asp-route-id="@item.EmployeeId">Edit</a> |
-            <a asp-action="Details" asp-route-id="@item.EmployeeId">Details</a> |
-            <a asp-action="Delete" asp-route-id="@item.EmployeeId">Delete</a>
-        </td>
-    </tr>
-}
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeAddr)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeBirthDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeFirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeLastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeePhoneNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status.StatusName)
+            </td>
+            <td>
+                <a asp-action="EmployeeDetails" asp-route-id="@item.EmployeeId">Details</a> |
+                <a asp-action="DeleteEmployee" asp-route-id="@item.EmployeeId" asp-route-confirm="true" onclick="return confirm('Are you sure you wish to delete this?');">Delete</a>
+            </td>
+        </tr>
+    }
 </table>
+<p>
+    Page @(Model.TotalPage < Model.PageIndex ? 0 : Model.PageIndex) of @Model.TotalPage
+    <nav asp-pager-source="Model" asp-pager-options="emPagedOptions" asp-route-currentFilter="@ViewBag.CurrentFilter"
+         asp-route-currentSort="@ViewBag.CurrentSort"></nav>
+</p>
